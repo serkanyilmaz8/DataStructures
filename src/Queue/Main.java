@@ -21,5 +21,7 @@ public class Main {
 
         System.out.println("value of front: " + queue1.getFront());
 
+        System.out.println("commit deneme");
+
     }
 }
