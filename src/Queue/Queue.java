@@ -9,7 +9,7 @@ public class Queue {
     public Queue(int size) {
         this.size = size;
         this.front = 0;
-        this.rear = -1;
+        this.rear = 0;
         items = new int[size];
     }
 
@@ -22,7 +22,7 @@ public class Queue {
     }
 
     public boolean isEmpty(){
-        return (rear == -1);
+        return (rear == front);
     }
 
     public boolean isFull(){
@@ -33,8 +33,8 @@ public class Queue {
         if(isFull()){
             System.out.println("Queue is Full. You cannot add anything");
         }else{
-            rear++;
             items[rear] = data;
+            rear++;
         }
     }
 
@@ -46,7 +46,7 @@ public class Queue {
             int temp = items[0];
             int i=1;
 
-            while(i <= rear){
+            while(i <= rear-1){
                 items[i-1] = items[i];
                 i++;
             }
@@ -61,11 +61,11 @@ public class Queue {
     }
 
     public void display(){
-        System.out.print("bas->");
+        System.out.print("son->");
         for(int i=rear; i>=0; i--){
             System.out.print(items[i] + "->");
         }
-        System.out.print("son");
+        System.out.print("bas");
     }
 
 
