@@ -1,72 +1,76 @@
 package Queue;
 
 public class Queue {
-    private int front;
-    private int rear;
-    private int size;
-    private int[] items;
+    private int front, rear, capacity, size;
+    private int[] queue;
 
-    public Queue(int size) {
-        this.size = size;
-        this.front = 0;
-        this.rear = 0;
-        items = new int[size];
-    }
-
-    public int getRear(){
-        return items[rear];
-    }
-
-    public int getFront() {
-        return items[front];
+    Queue(int cap){
+        this.rear=0;
+        this.size=0;
+        this.front=0;
+        this.capacity=cap;
+        this.queue = new int[capacity];
     }
 
     public boolean isEmpty(){
-        return (rear == front);
+        if(size==0)
+            return true;
+        return false;
     }
 
     public boolean isFull(){
-        return (rear == size-1);
+        if(size==capacity)
+            return true;
+        return false;
     }
 
-    public void enQueue(int data){
+    public void enqueue(int val){
         if(isFull()){
-            System.out.println("Queue is Full. You cannot add anything");
-        }else{
-            items[rear] = data;
-            rear++;
+            System.out.println("Queue is Full. You cannot add a new element.");
+            return;
         }
+        rear=rear%capacity;
+        queue[rear]=val;
+        rear++;
+        size++;
     }
 
-    public int deQueue(){
+    public int dequeue(){
         if(isEmpty()){
-            System.out.println("Queue is Empty");
+            System.out.println("Queue is Empty. You cannot dequeue anything.");
             return -1;
-        }else{
-            int temp = items[0];
-            int i=1;
-
-            while(i <= rear-1){
-                items[i-1] = items[i];
-                i++;
-            }
-
-            rear--;
-            return temp;
         }
+
+        front = front%capacity;
+        size--;
+        int temp=queue[front];
+        front++;
+        queue[front-1]=0;
+        return temp;
     }
 
-    public int count(){
-        return rear+1;
+    public int getRear(){
+        return queue[rear-1];
+    }
+
+    public int getFront() {
+        return queue[front];
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public int getSize() {
+        return size;
     }
 
     public void display(){
-        System.out.print("son->");
-        for(int i=rear; i>=0; i--){
-            System.out.print(items[i] + "->");
+        System.out.println("Queue:");
+        System.out.print("front");
+        for (int i:queue){
+            System.out.print("<-" + i);
         }
-        System.out.print("bas");
+        System.out.print("<-rear");
     }
-
-
 }
