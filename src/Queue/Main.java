@@ -13,6 +13,7 @@ public class Main {
         queue1.enqueue(7);
 
         queue1.dequeue();
+        queue1.enqueue(7);
 
         queue1.display();
 
