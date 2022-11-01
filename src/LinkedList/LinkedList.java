@@ -154,6 +154,40 @@ public class LinkedList<T extends Comparable>{
         return mostTotal;
     }
 
+    //Function to reverse a linked list.
+    public void reverseList()
+    {
+        Node<T> iterator1 = head;
+        Node<T>iterator2 = head;
+        Node<T> newNode = null;
+        int count = 0;
+
+        while(iterator1 != null){
+            iterator1 = iterator1.next;
+            count++;
+        }
+
+
+
+        for(int i=0; i<count; i++){
+            while(iterator2.next != null){
+                iterator2 = iterator2.next;
+            }
+            if(newNode == null)
+                newNode = new Node(iterator2.value);
+            else{
+                newNode.next = new Node(iterator2.value);
+                newNode = newNode.next;
+            }
+            iterator2 = null;
+            iterator2 = head;
+        }
+        head = newNode;
+
+
+
+
+    }
 
     public void display(){
         Node<T> iterator = head;
