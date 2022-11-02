@@ -3,6 +3,7 @@ package homework3;
 import DoublyLinkedList.DoublyLinkedList;
 
 import java.io.*;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException, FileNotFoundException {
@@ -56,9 +57,37 @@ public class Main {
         System.out.println();
         System.out.println("student(s) who has lowest data structures grade: ");
         sortedByData.lowestDS();
-        /*sortedByData.deleteById("101");
-        System.out.println("The student who id is 101 was deleted:");
-        sortedByData.display();*/
+        sortedByData.deleteById("105");
+        System.out.println("The student who id is 105 was deleted:");
+        sortedByData.display();
+        System.out.println();
+        sortedByData.sortedAdd(insertNewStudent());
+        System.out.println("new student inserted: ");
+        sortedByData.display();
 
+    }
+
+    public static Student insertNewStudent(){
+        Scanner scan = new Scanner(System.in);
+
+        System.out.print("enter id: ");
+        String id = scan.nextLine();
+        System.out.println();
+
+        System.out.print("enter name: ");
+        String name = scan.nextLine();
+        System.out.println();
+
+        System.out.print("enter math grade: ");
+        int math = scan.nextInt();
+        System.out.println();
+
+        System.out.print("enter data structures grade: ");
+        int data = scan.nextInt();
+        System.out.println();
+
+        Student newStudent = new Student(id, name, math, data);
+
+        return newStudent;
     }
 }

@@ -54,26 +54,33 @@ public class DoublyLinkedList<T extends Comparable>{
     public void sortedAdd(T val){
         DNode<T> newNode = new DNode<>(val);
 
-        if(head == null)
+        if(head == null) {
             head = newNode;
-        else if(head.value.compareTo(newNode.value) == 1) {
+            tail = newNode;
+        }else if(head.value.compareTo(newNode.value) == 1) {
             newNode.next = head;
+            head.prev = newNode;
             head = newNode;
         }else{
             DNode iterator = head;
-            DNode prev = head;
+            //DNode prev = head;
             while(iterator != null){
                 if(newNode.value.compareTo(iterator.value) == -1)
                     break;
-                prev = iterator;
+                //prev = iterator;
                 iterator = iterator.next;
             }
             if(iterator != null){
-                prev.next = newNode;
+                iterator.prev.next = newNode;
+                newNode.prev = iterator.prev;
                 newNode.next = iterator;
+                iterator.prev = newNode;
             }
-            else
-                prev.next = newNode;
+            else {
+                tail.next = newNode;
+                newNode.prev = tail;
+                tail = newNode;
+            }
         }
     }
 
@@ -82,26 +89,32 @@ public class DoublyLinkedList<T extends Comparable>{
 
         if(head == null) {
             head = newNode;
+            tail = newNode;
         }
         else if(((Student)head.value).compareDataStructures(val) == 1) {
             newNode.next = head;
+            head.prev = newNode;
             head = newNode;
         }else{
             DNode iterator = head;
-            DNode prev = head;
+            //DNode prev = head;
             while(iterator != null){
                 if(((Student)iterator.value).compareDataStructures(val) == 1)
                     break;
-                prev = iterator;
+                //prev = iterator;
                 iterator = iterator.next;
             }
             if(iterator != null){
-                prev.next = newNode;
+                iterator.prev.next = newNode;
+                newNode.prev = iterator.prev;
                 newNode.next = iterator;
+                iterator.prev = newNode;
                 return;
             }
             else
-                prev.next = newNode;
+                newNode.prev = tail;
+                tail.next = newNode;
+                tail = newNode;
             return;
         }
     }
@@ -141,34 +154,26 @@ public class DoublyLinkedList<T extends Comparable>{
     }
 
     public void deleteById(String id){
-        if(head.value instanceof Student){
-            if(head != null){
-                Student headVal = (Student)head.value;
-                //Student tailVal = (Student)tail.value;
+        DNode<T> iterator = head;
 
-                if(headVal.getId().equals(id))
-                    head = head.next;
-                /*else if(tailVal.getId().equals(id)) {
-                    tail.prev.next = null;
-                    tail = tail.prev;
-                }*/else{
-                    DNode iterator = head;
+        if(((Student)head.value).getId().equals(id)){
+            head = head.next;
+        }
 
-                    while(iterator != null){
-                        Student student = (Student)iterator.value;
-                        if(student.getId().equals(id))
-                            break;
-                        iterator = iterator.next;
-                    }
+        else if(((Student)tail.value).getId().equals(id)){
+            tail.prev.next = null;
+            tail = tail.prev;
+        }
+        else{
+            while(iterator != null){
+                if(((Student)iterator.value).getId().equals(id)){
                     //iterator.prev.next = iterator.next;
                     iterator.next.prev = iterator.prev;
                 }
+                iterator = iterator.next;
+            }
+        }
 
-
-            }else
-                return;
-        }else
-            return;
     }
 
 

@@ -55,6 +55,16 @@ public class Student implements Comparable, MyComparable {
 
         return returnable;
     }
+
+    @Override
+    public int compareId(String s) {
+        if(this.id == s)
+            return 0;
+        else
+            return -1;
+    }
+
+
 }
 
 
