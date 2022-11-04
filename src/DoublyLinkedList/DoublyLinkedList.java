@@ -114,15 +114,16 @@ public class DoublyLinkedList<T extends Comparable>{
             else
                 newNode.prev = tail;
                 tail.next = newNode;
+                newNode.next = null;
                 tail = newNode;
             return;
         }
     }
 
-    public void mathAverage(){
+    public double mathAverage(){
         if(head.value instanceof Student){
             DNode iterator = head;
-            int total = 0;
+            double total = 0;
             int count = 0;
 
             while(iterator != null){
@@ -132,9 +133,9 @@ public class DoublyLinkedList<T extends Comparable>{
                 iterator = iterator.next;
             }
 
-            System.out.println("average of Math grades: " + total/count);
+            return total/count;
         }else
-            return;
+            return -1;
     }
 
     public void lowestDS(){
@@ -167,12 +168,66 @@ public class DoublyLinkedList<T extends Comparable>{
         else{
             while(iterator != null){
                 if(((Student)iterator.value).getId().equals(id)){
-                    //iterator.prev.next = iterator.next;
+                    iterator.prev.next = iterator.next;
                     iterator.next.prev = iterator.prev;
                 }
                 iterator = iterator.next;
             }
         }
+
+    }
+
+    public void count(){
+        DNode iterator = head;
+        int count = 0;
+
+        while(iterator != null){
+            count++;
+            iterator = iterator.next;
+        }
+
+        System.out.println("Number of students in the class: " + count);
+
+    }
+
+    public void passedMath(){
+        double average = mathAverage();
+        DNode iterator = head;
+
+        while(iterator != null){
+            if(((Student)iterator.value).getMath_grade()>average)
+                System.out.println(((Student)iterator.value));
+            iterator = iterator.next;
+        }
+    }
+
+    public void passedData(){
+        double average = dataAverage();
+        DNode iterator = head;
+
+        while(iterator != null){
+            if(((Student)iterator.value).getData_garde()>average)
+                System.out.println(((Student)iterator.value));
+            iterator = iterator.next;
+        }
+    }
+
+    public double dataAverage() {
+        if(head.value instanceof Student){
+            DNode iterator = head;
+            double total = 0;
+            int count = 0;
+
+            while(iterator != null){
+                count++;
+                Student student = (Student)iterator.value;
+                total += student.getData_garde();
+                iterator = iterator.next;
+            }
+
+            return total/count;
+        }else
+            return -1;
 
     }
 

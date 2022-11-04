@@ -42,6 +42,10 @@ public class Student implements Comparable, MyComparable {
         return "id:" + this.id + ", " + "name:" + this.name + ", " + "math score:" + this.math_grade + ", " + "data structures grade:" + this.data_garde;
     }
 
+    public int getData_garde() {
+        return this.data_garde;
+    }
+
     @Override
     public int compareDataStructures(Student s) {
         int returnable;
