@@ -1,8 +1,12 @@
 package Queue;
 
+import java.util.Stack;
+
 public class Main {
     public static void main(String[] args) {
-       Queue queue1 = new Queue(7);
+      int num = 1221;
+     System.out.println("is palindrome: " + isPalindrome(num));
+      /*Queue queue1 = new Queue(7);
 
         queue1.enqueue(1);
         queue1.enqueue(2);
@@ -25,7 +29,29 @@ public class Main {
 
         System.out.println("value of front: " + queue1.getFront());
 
-        System.out.println("commit deneme");
+        System.out.println("commit deneme");*/
+
 
     }
+
+    public static boolean isPalindrome(int num){
+     Stack<Integer> stack = new Stack<>();
+     Queue queue = new Queue(5);
+
+     while(num != 0){
+       int reminder = num%10;
+       stack.push(reminder);
+       queue.enqueue(reminder);
+       num = num / 10;
+     }
+
+     while(!stack.isEmpty()){
+       int s = stack.pop();
+       int q = queue.dequeue();
+       if(s != q)
+         return false;
+     }
+     return true;
+    }
+
 }

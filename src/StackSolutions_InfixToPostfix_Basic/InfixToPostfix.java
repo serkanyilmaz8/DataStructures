@@ -68,7 +68,7 @@ public class InfixToPostfix {
             }
         }
         while(!operators.isEmpty()){
-            postfix = postfix+operators.pop();
+            postfix = postfix + operators.pop();
         }
 
 

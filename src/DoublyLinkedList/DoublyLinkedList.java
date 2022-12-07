@@ -19,6 +19,23 @@ public class DoublyLinkedList<T extends Comparable>{
         head = newNode;
     }
 
+    public void addRightAfterHead(T val){
+        DNode newNode = new DNode<>(val);
+        if(head == null){
+            head =  newNode;
+            return;
+        }else if(head.next == null) {
+            head.next = newNode;
+            newNode.prev = head;
+        }else{
+            newNode.next = head.next;
+            head.next.prev = newNode;
+            head.next = newNode;
+            newNode.prev = head;
+        }
+
+    }
+
     public void addToEnd(T val){
         DNode<T> newNode = new DNode<>(val);
         if(head == null){
@@ -26,9 +43,14 @@ public class DoublyLinkedList<T extends Comparable>{
             tail = newNode;
             return;
         }
-        tail.next = newNode;
-        newNode.prev = tail;
-        tail = newNode;
+
+        DNode iterator = head;
+        while(iterator.next != null){
+            iterator = iterator.next;
+        }
+        iterator.next = newNode;
+        newNode.prev = iterator;
+
     }
 
     public void delete(T val){
@@ -36,10 +58,10 @@ public class DoublyLinkedList<T extends Comparable>{
 
         if(head.value.equals(val))
             head = head.next;
-        else if(tail.value.equals(val)){
+        /*else if(tail.value.equals(val)){
             tail.prev.next = null;
             tail = tail.prev;
-        }
+        }*/
         else{
              while(iterator != null){
                  if(iterator.value.equals(val)){

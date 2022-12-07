@@ -4,6 +4,7 @@ public class Main {
     public static void main(String[] args) {
         DoublyLinkedList doublyLinkedList = new DoublyLinkedList();
 
+
         doublyLinkedList.addFront(60);
         doublyLinkedList.addFront(50);
         doublyLinkedList.addFront(40);
@@ -14,7 +15,7 @@ public class Main {
         doublyLinkedList.display();
         System.out.println();
 
-        doublyLinkedList.delete(60);
+        doublyLinkedList.addRightAfterHead(100);
         doublyLinkedList.display();
 
     }

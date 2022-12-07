@@ -1,5 +1,4 @@
 package GenericStack;
-import Stack.Stack;
 
 public class GenericTest {
 
