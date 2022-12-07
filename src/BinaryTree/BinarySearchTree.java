@@ -135,13 +135,54 @@ public class BinarySearchTree <T extends Comparable>{
             return(max+1);
         }
     }
-/*
+
     public void deleteRecursively(T val){
-        deleteRecursively(root, val);
+        root = deleteRecursively(root, val);
     }
 
-    private TNode deleteRecursively(TNode cRoot, T val){
+    private TNode deleteRecursively(TNode currentRoot, T val){
+        if(root == null)
+            return null;
 
-    }*/
+        if(search(val)){
+            if(currentRoot.value.compareTo(val) == 0){
+                // there in one node in tree
+                if(currentRoot.right==null && currentRoot.left==null)
+                    return null;
+
+                // it has only right sub tree
+                if(currentRoot.left==null && currentRoot.right!=null)
+                    return currentRoot.right;
+
+                // it has only left sub tree
+                if(currentRoot.right==null && currentRoot.left!=null)
+                    return currentRoot.left;
+
+                //it has both left and right sub tree
+                TNode node = helper(currentRoot.right, currentRoot);
+                currentRoot.value = node.value;
+            }else if(currentRoot.value.compareTo(val) == -1)
+                currentRoot.right = deleteRecursively(currentRoot.right, val);
+            else
+                currentRoot.left = deleteRecursively(currentRoot.left, val);
+            return currentRoot;
+        }else{
+            System.out.println("This value does not exist");
+            return currentRoot;
+        }
+    }
+
+    private TNode helper(TNode right, TNode currentRoot) {
+        TNode prev = currentRoot;
+        TNode curr = right;
+
+        while(curr.left != null){
+            prev = curr;
+            curr = curr.left;
+        }
+
+        deleteRecursively(prev, (T)curr.value);
+        return curr;
+    }
 
 }

@@ -23,9 +23,9 @@ public class Main {
         int height = bst1.findHeight();
         System.out.println("Height of the tree: " + height);
 
-        /*bst1.deleteRecursively(10);
+        bst1.deleteRecursively(10);
         System.out.println("10 deleted");
-        bst1.inorderTraversal();*/
+        bst1.inorderTraversal();
 
     }
 }
